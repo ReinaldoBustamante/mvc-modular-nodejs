@@ -1,12 +1,6 @@
-import { prisma } from "./config/db"
+import { AppRouter } from "./routes";
+import { AppServer } from "./server";
 
-( async () => {
-    try{
-        const users = await prisma.user.findMany();
-        console.log("Conexion con bd establecida");
-        console.log("Cantidad de usuarios: ", users.length);
-    }
-    catch (error){
-        console.log(error);
-    }
-})()
+const serverApp = new AppServer(3000, AppRouter.router());
+
+serverApp.start();
