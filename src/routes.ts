@@ -1,5 +1,5 @@
-import { Router } from "express";
 import { AuthRouter } from "./modules";
+import { Router } from "express";
 
 export class AppRouter {
   public static router(): Router {
