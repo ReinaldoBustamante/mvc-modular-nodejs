@@ -18,11 +18,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma:seed": "ts-node prisma/seed.ts",
     "prisma:migrate": "npx prisma migrate dev && npm run prisma:seed",
-    "dev": "npm run prisma:migrate && tsnd --respawn --clear ./src/index.ts"
+    "dev": "npm run prisma:migrate && tsnd --respawn --clear ./src/index.ts",
+    "format": "npx prettier . --write"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.10",
+    "prettier": "^3.6.2",
     "prisma": "^6.11.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
