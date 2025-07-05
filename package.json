@@ -16,7 +16,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsnd --respawn --clear ./src/index.ts"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "prisma:migrate": "npx prisma migrate dev && npm run prisma:seed",
+    "dev": "npm run prisma:migrate && tsnd --respawn --clear ./src/index.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
@@ -26,6 +28,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@prisma/client": "^6.11.1",
     "express": "^5.1.0"
   }
 }
