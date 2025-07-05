@@ -1,12 +1,15 @@
+import { AuthController, AuthService, AuthModel } from ".";
 import { Router } from "express";
-import { AuthController } from "./auth.controller";
 
 export class AuthRouter {
-  public static router() {
+  public static router(): Router {
     const router = Router();
-    const authController = new AuthController();
+    const authModel = new AuthModel();
+    const authService = new AuthService(authModel);
+    const authController = new AuthController(authService);
 
-    router.get("/", authController.getUsers);
+    router.post("/register", authController.registerUser);
+
     return router;
   }
 }
