@@ -1,6 +1,5 @@
 import { PrismaClient } from "../generated/prisma";
 
-
 const prisma = new PrismaClient();
 
 async function main() {
@@ -10,15 +9,15 @@ async function main() {
   if (!userExists) {
     await prisma.user.create({
       data: {
-        name: 'Admin',
-        email: 'admin@test.com',
-        role: 'admin',
-        password: "test"
+        name: "Admin",
+        email: "admin@test.com",
+        role: "admin",
+        password: "test",
       },
     });
-    console.log('Usuario inicial creado');
+    console.log("Usuario inicial creado");
   } else {
-    console.log('Usuario inicial ya existe');
+    console.log("Usuario inicial ya existe");
   }
 }
 
