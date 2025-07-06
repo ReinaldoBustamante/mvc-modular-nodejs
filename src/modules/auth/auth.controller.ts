@@ -1,23 +1,36 @@
 import { AuthService } from ".";
-import { CustomError } from "../../errors/CustomError";
+import { LoginUserDto } from "./dtos/loginUser.dto";
 import { RegisterUserDto } from "./dtos/registerUser.dto";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 export class AuthController {
-  constructor(public authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  public registerUser = async (req: Request, res: Response) => {
+  public registerUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     const registerUserDto = new RegisterUserDto(req.body);
     try {
-      const user = await this.authService.registerUser(registerUserDto);
-      res.json(user);
+      const createdUser = await this.authService.registerUser(registerUserDto);
+      res.json(createdUser);
     } catch (error) {
-      if (error instanceof CustomError) {
-        res.status(error.statusCode).json({ error: error.message });
-      } else {
-        console.log(error);
-        res.status(500).json("error");
-      }
+      next(error);
+    }
+  };
+
+  public loginUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    const loginUserDto = new LoginUserDto(req.body);
+    try {
+      const validatedUser = await this.authService.loginUser(loginUserDto);
+      res.json(validatedUser);
+    } catch (error) {
+      next(error);
     }
   };
 }
