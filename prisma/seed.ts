@@ -1,4 +1,5 @@
 import { PrismaClient } from "../generated/prisma";
+import { BcryptAdapter } from "../src/adapters/bcrypt.adapter";
 
 const prisma = new PrismaClient();
 
@@ -12,7 +13,7 @@ async function main() {
         name: "Admin",
         email: "admin@test.com",
         role: "admin",
-        password: "test",
+        password: await BcryptAdapter.hashPassword("test123"),
       },
     });
     console.log("Usuario inicial creado");
