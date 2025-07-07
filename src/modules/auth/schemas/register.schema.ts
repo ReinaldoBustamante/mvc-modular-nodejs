@@ -6,5 +6,5 @@ export const registerSchema = z.object({
   password: z.string().min(6, "la contraseña debe tener minimo 6 caracteres"),
   role: z.enum(["admin", "user"], {
     errorMap: () => ({ message: "Role debe ser 'admin' o 'user'" }),
-  }),
+  }).optional(),
 });
