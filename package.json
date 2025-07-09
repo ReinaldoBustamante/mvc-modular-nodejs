@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watchAll",
     "prisma:seed": "ts-node prisma/seed.ts",
     "prisma:migrate": "npx prisma migrate dev && npm run prisma:seed",
     "dev": "npm run prisma:migrate && tsnd --respawn --clear ./src/index.ts",
