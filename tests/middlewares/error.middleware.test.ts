@@ -12,7 +12,7 @@ describe("error.middleware", () => {
             status: jest.fn().mockReturnThis(), 
             json: jest.fn(),
         };
-        next = jest.fn();
+        next = jest.fn()
     });
 
     it('test zod Error', () => {
