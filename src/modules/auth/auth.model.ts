@@ -1,6 +1,6 @@
 import { prisma } from "../../config/db";
 import { CustomError } from "../../errors/CustomError";
-import { RegisterUserDto } from "./dtos/registerUser.dto";
+import { RegisterUserDto } from "./dtos";
 
 export class AuthModel {
   public async findUser(email: string) {

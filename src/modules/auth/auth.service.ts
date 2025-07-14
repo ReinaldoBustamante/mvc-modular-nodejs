@@ -1,9 +1,7 @@
 import { AuthModel } from ".";
-import { BcryptAdapter } from "../../adapters/bcrypt.adapter";
-import { JWTAdapter } from "../../adapters/jwt.adapter";
+import { BcryptAdapter, JWTAdapter } from "../../adapters";
 import { CustomError } from "../../errors/CustomError";
-import { LoginUserDto } from "./dtos/loginUser.dto";
-import { RegisterUserDto } from "./dtos/registerUser.dto";
+import { LoginUserDto, RegisterUserDto } from "./dtos";
 
 export class AuthService {
   constructor(private authModel: AuthModel) {}
@@ -41,7 +39,7 @@ export class AuthService {
     });
 
     return {
-      status: "loged",
+      status: "logged",
       token: token,
     };
   }

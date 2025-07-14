@@ -1,0 +1,54 @@
+loginUserRequest:
+  type: object
+  properties:
+    email:
+      type: string
+      format: email
+      example: test@example.com
+    password:
+      type: string
+      format: password
+      example: 123456
+  required:
+    - email
+    - password
+
+loginUserResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      example: "logged"
+    token:
+      type: string
+      example: "eyJhbGciOiJIUzI1NiI....."
+
+loginUserBadRequest:
+  type: object
+  properties:
+    ok:
+      type: boolean
+      example: false
+    errors:
+      type: array
+      example: [{ "field": ".....", "message": "....." }]
+
+loginUserUnauthorized:
+  type: object
+  properties:
+    ok:
+      type: boolean
+      example: false
+    errors:
+      type: array
+      example: [{ "message": "invalid password" }]
+
+loginUserNotFound:
+  type: object
+  properties:
+    ok:
+      type: boolean
+      example: false
+    errors:
+      type: array
+      example: [{ "message": "User .... not found" }]

@@ -1,8 +1,7 @@
 import express, { Router } from "express";
 import { ErrorMiddleware } from "./middlewares/error.middleware";
-import swaggerUI from 'swagger-ui-express';
-import fs from 'fs'
-import YAML from 'yaml'
+import swaggerUI from "swagger-ui-express";
+import SwaggerParser from "@apidevtools/swagger-parser"; // Importa SwaggerParser
 
 export class AppServer {
   constructor(
@@ -10,13 +9,20 @@ export class AppServer {
     public routes: Router,
   ) {}
 
-  public start() {
+  public async start() {
+    // Cambia a async para usar await
     const app = express();
-    const file = fs.readFileSync('./docs/swagger.yaml', 'utf-8');
-    const swaggerDocument = YAML.parse(file);
+
+    let swaggerDocument;
+    try {
+      swaggerDocument = await SwaggerParser.bundle("./docs/swagger.yaml");
+    } catch (err) {
+      console.error("Error al parsear o bundlear Swagger/OpenAPI:", err);
+      process.exit(1);
+    }
 
     app.use(express.json());
-    app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+    app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument)); // Pasa el documento ya resuelto
     app.use("/api", this.routes);
     app.use(ErrorMiddleware.errorHandler);
 

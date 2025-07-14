@@ -1,0 +1,49 @@
+registerUserRequest:
+  type: object
+  properties:
+    email:
+      type: string
+      format: email
+      example: test@example.com
+    name:
+      type: string
+      example: john doe
+    password:
+      type: string
+      format: password
+      example: 123456
+  required:
+    - email
+    - name
+    - password
+
+registerUserResponse:
+  type: object
+  properties:
+    email:
+      type: string
+      format: email
+      example: test@example.com
+    name:
+      type: string
+      example: john doe
+
+registerUserBadRequest:
+  type: object
+  properties:
+    ok:
+      type: boolean
+      example: false
+    errors:
+      type: array
+      example: [{ "field": "...", "message": "Required" }]
+
+registerUserConflict:
+  type: object
+  properties:
+    ok:
+      type: boolean
+      example: false
+    errors:
+      type: array
+      example: [{ "message": "User already exist" }]

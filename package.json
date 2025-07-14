@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watchAll --no-cache",
     "prisma:seed": "ts-node prisma/seed.ts",
     "prisma:migrate": "npx prisma migrate dev && npm run prisma:seed",
     "dev": "npm run prisma:migrate && tsnd --respawn --clear ./src/index.ts",
@@ -26,12 +26,13 @@
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.10",
+    "@types/supertest": "^6.0.3",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "jest": "^30.0.4",
     "prettier": "^3.6.2",
     "prisma": "^6.11.1",
-    "supertest": "^7.1.1",
+    "supertest": "^7.1.3",
     "ts-jest": "^29.4.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
@@ -44,6 +45,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "swagger-jsdoc": "^6.2.8",
+    "swagger-parser": "^10.0.3",
     "swagger-ui-express": "^5.0.1",
     "yaml": "^2.8.0",
     "zod": "^3.25.74"

@@ -1,0 +1,30 @@
+# paths/users.yaml
+post:
+  tags:
+    - auth
+  summary: Crear un nuevo usuario
+  requestBody:
+    description: Create a new user
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/registerUser.schema.yaml#/registerUserRequest"
+  responses:
+    "201":
+      description: "usuario creado exitosamente"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/registerUser.schema.yaml#/registerUserResponse"
+    "400":
+      description: "entradas invalidas"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/registerUser.schema.yaml#/registerUserBadRequest"
+    "409":
+      description: "ya existe el usuario"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/registerUser.schema.yaml#/registerUserConflict"

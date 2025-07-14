@@ -1,8 +1,7 @@
 import { AuthController, AuthService, AuthModel } from ".";
 import { Router } from "express";
-import { registerSchema } from "./schemas/register.schema";
-import { ValidateMiddleware } from "../../middlewares/validate.middleware";
-import { loginSchema } from "./schemas/login.schema";
+import { registerSchema, loginSchema } from "./schemas";
+import { ValidateMiddleware } from "../../middlewares";
 
 export class AuthRouter {
   public static router(): Router {

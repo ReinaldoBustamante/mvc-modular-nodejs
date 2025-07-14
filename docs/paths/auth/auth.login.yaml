@@ -1,0 +1,39 @@
+# paths/users.yaml
+post:
+  tags:
+    - auth
+  summary: Ingresar con credenciales de acceso
+  requestBody:
+    description: Credenciales para el acceso de usuario
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/loginUser.schema.yaml#/loginUserRequest"
+  responses:
+    "200":
+      description: "Usuario ingreso correctamente"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/loginUser.schema.yaml#/loginUserResponse"
+
+    "400":
+      description: "Datos ingresados sin el formato adecuado"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/loginUser.schema.yaml#/loginUserBadRequest"
+
+    "401":
+      description: "Credenciales invalidas"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/loginUser.schema.yaml#/loginUserUnauthorized"
+
+    "404":
+      description: "Usuario no existe"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/loginUser.schema.yaml#/loginUserNotFound"

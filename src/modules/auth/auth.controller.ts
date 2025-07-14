@@ -1,6 +1,5 @@
 import { AuthService } from ".";
-import { LoginUserDto } from "./dtos/loginUser.dto";
-import { RegisterUserDto } from "./dtos/registerUser.dto";
+import { LoginUserDto, RegisterUserDto } from "./dtos";
 import { NextFunction, Request, Response } from "express";
 
 export class AuthController {
@@ -14,7 +13,7 @@ export class AuthController {
     const registerUserDto = new RegisterUserDto(req.body);
     try {
       const createdUser = await this.authService.registerUser(registerUserDto);
-      res.json(createdUser);
+      res.status(201).json(createdUser);
     } catch (error) {
       next(error);
     }

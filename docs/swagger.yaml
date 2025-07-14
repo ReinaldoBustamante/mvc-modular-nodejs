@@ -1,123 +1,19 @@
+# openapi.yaml
 openapi: 3.0.0
 info:
-  title: Fintrack API
-  description: |-
-    API for managing finances
+  title: Modular API Example
   version: 1.0.0
+  description: API modularizada con Swagger YAML y $ref
 
 servers:
   - url: http://localhost:3000/api
 
 tags:
   - name: auth
-    description: authentificate user
+    description: Operaciones relacionada con la autentificación de usuarios
 
 paths:
   /auth/register:
-    post:
-      tags:
-        - auth
-      description: Register a new user.
-      operationId: registerUser
-      requestBody:
-        description: Register a new user to plataform
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestUserRegister'
-        required: true
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseUserRegister'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/responseBadRequest'
-        '409':
-          description: User already exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/responseUserExist'
+    $ref: "./paths/auth/auth.register.yaml"
   /auth/login:
-    post: 
-      tags:
-        - auth
-        
-components:
-  schemas:
-    RequestUserRegister:
-      type: object
-      required:
-        - email
-        - name
-        - password
-      properties:
-        email:
-          type: string
-          format: email
-          example: johndoe@example.com
-        name:
-          type: string
-          example: johndoe
-        password:
-          type: string
-          format: password
-          example: strongpassword123
-    ResponseUserRegister:
-      type: object
-      properties:
-        id: 
-          type: number
-          example: 1
-        name: 
-          type: string
-          example: johndoe
-        email: 
-          type: string
-          example: johndoe@example.com
-        role: 
-          type: string
-          example: user
-        created_at:
-          type: date
-          example: "2025-07-06T20:18:21.115Z"
-        updated_at:
-          type: date
-          example: "2025-07-06T20:18:21.115Z"
-    responseBadRequest:
-      type: object
-      properties:
-        ok:
-          type: boolean
-          example: false
-        errors:
-          type: array
-          example: [
-            {
-              "fields": "name",
-              "message": "Required"
-            }
-          ]
-    responseUserExist:
-      type: object
-      properties:
-        ok:
-          type: boolean
-          example: false
-        errors:
-          type: array
-          example: [
-            {
-              "message": "User already exist"
-            }
-          ]
-
-      
-      
+    $ref: "./paths/auth/auth.login.yaml"
