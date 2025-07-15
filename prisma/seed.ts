@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Verificar si ya existe un usuario para no duplicar
-  const userExists = await prisma.user.findFirst();
+  const userExists = await prisma.users.findFirst();
 
   if (!userExists) {
-    await prisma.user.create({
+    await prisma.users.create({
       data: {
         name: "Admin",
         email: "admin@test.com",

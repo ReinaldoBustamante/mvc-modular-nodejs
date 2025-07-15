@@ -14,7 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id Int @id @default(autoincrement())
   name String 
   email String @unique
@@ -22,4 +22,29 @@ model User {
   password String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  categories Categories[]
+  transactions Transactions[]
+}
+
+model Categories {
+  id Int @id @default(autoincrement())
+  name String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user_id Int 
+  user Users @relation(fields: [user_id], references: [id])
+  transactions Transactions[]
+  @@unique([user_id, name])
+}
+
+model Transactions {
+  id Int @id @default(autoincrement())
+  type String
+  amount Int
+  description String
+  created_at DateTime @default(now())
+  user_id Int
+  category_id Int
+  user Users @relation(fields: [user_id], references: [id])
+  categories Categories @relation(fields: [category_id], references: [id])
 }
