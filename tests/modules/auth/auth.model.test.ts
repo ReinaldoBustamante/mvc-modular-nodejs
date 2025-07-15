@@ -4,7 +4,7 @@ import { AuthModel } from "../../../src/modules/auth/auth.model";
 
 jest.mock("../../../src/config/db", () => ({
   prisma: {
-    user: {
+    users: {
       findUnique: jest.fn(),
       create: jest.fn(),
     },
@@ -20,14 +20,14 @@ describe("authModel - findUser", () => {
 
   it("should return user when email exists", async () => {
     const mockUser = { id: 1, email: "test@example.com" };
-    (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
+    (prisma.users.findUnique as jest.Mock).mockResolvedValue(mockUser);
     const result = await authModel.findUser("test@example.com");
 
     expect(result).toEqual(mockUser);
   });
 
   it("should return an internal server error when an error occurs while attempting to find a user", async () => {
-    (prisma.user.findUnique as jest.Mock).mockRejectedValue(
+    (prisma.users.findUnique as jest.Mock).mockRejectedValue(
       CustomError.internal("Error al buscar usuario"),
     );
     const result = authModel.findUser("test@example.com");
@@ -51,13 +51,13 @@ describe("authModel - registerUser", () => {
       name: "reinaldo bustamante",
       password: "123",
     };
-    (prisma.user.create as jest.Mock).mockResolvedValue(mockRegisterUser);
+    (prisma.users.create as jest.Mock).mockResolvedValue(mockRegisterUser);
     const userRegister = await authModel.registerUser(mockRegisterUser);
     expect(userRegister).toEqual(mockRegisterUser);
   });
 
   it("should return an internal server error while attempting to create a user", async () => {
-    (prisma.user.create as jest.Mock).mockRejectedValue(
+    (prisma.users.create as jest.Mock).mockRejectedValue(
       CustomError.internal("Error al registrar usuario"),
     );
     const result = authModel.registerUser({
