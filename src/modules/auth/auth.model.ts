@@ -5,7 +5,7 @@ import { RegisterUserDto } from "./dtos";
 export class AuthModel {
   public async findUser(email: string) {
     try {
-      const user = await prisma.user.findUnique({
+      const user = await prisma.users.findUnique({
         where: {
           email,
         },
@@ -19,7 +19,7 @@ export class AuthModel {
 
   public async registerUser(data: RegisterUserDto) {
     try {
-      const user = await prisma.user.create({ data });
+      const user = await prisma.users.create({ data });
       return user;
     } catch (error) {
       console.log(error);

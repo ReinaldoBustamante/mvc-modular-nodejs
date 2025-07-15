@@ -12,7 +12,7 @@ export class AppServer {
   public async start() {
     // Cambia a async para usar await
     const app = express();
-
+    app.use(express.json());
     let swaggerDocument;
     try {
       swaggerDocument = await SwaggerParser.bundle("./docs/swagger.yaml");
@@ -21,7 +21,6 @@ export class AppServer {
       process.exit(1);
     }
 
-    app.use(express.json());
     app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument)); // Pasa el documento ya resuelto
     app.use("/api", this.routes);
     app.use(ErrorMiddleware.errorHandler);
