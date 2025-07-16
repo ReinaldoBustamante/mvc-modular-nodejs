@@ -34,11 +34,11 @@ export class CategoriesModel {
     }
   }
 
-  public async create(name: string, userId: number) {
+  public async create(payload: {name: string, budget: number}, userId: number) {
     try {
       const categoryCreated = await prisma.categories.create({
         data: {
-          name,
+          ...payload,
           user_id: userId,
         },
       });

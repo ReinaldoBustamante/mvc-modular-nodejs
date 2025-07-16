@@ -29,6 +29,7 @@ model Users {
 model Categories {
   id Int @id @default(autoincrement())
   name String
+  budget Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   user_id Int 

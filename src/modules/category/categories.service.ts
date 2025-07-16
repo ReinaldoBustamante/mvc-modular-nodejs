@@ -14,7 +14,7 @@ export class CategoriesService {
     if (isCategoryExists) throw CustomError.conflict("Category already exist");
 
     const categoryCreated = await this.categoriesModel.create(
-      createCategoryDto.name,
+      createCategoryDto,
       userId,
     );
 
