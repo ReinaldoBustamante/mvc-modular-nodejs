@@ -1,19 +1,19 @@
 import { CustomError } from "../../errors/CustomError";
-import { CategoriesModel } from "./categories.model";
+import { CategoryModel } from "./category.model";
 import { CreateCategoryDto } from "./dtos/createCategory.dto";
 import { UpdateCategoryDto } from "./dtos/updateCategory.dto";
 
-export class CategoriesService {
-  constructor(private categoriesModel: CategoriesModel) {}
+export class CategoryService {
+  constructor(private categoryModel: CategoryModel) {}
 
   public async create(createCategoryDto: CreateCategoryDto, userId: number) {
-    const isCategoryExists = !!(await this.categoriesModel.findCategory(
+    const isCategoryExists = !!(await this.categoryModel.findCategory(
       createCategoryDto.name,
       userId,
     ));
     if (isCategoryExists) throw CustomError.conflict("Category already exist");
 
-    const categoryCreated = await this.categoriesModel.create(
+    const categoryCreated = await this.categoryModel.create(
       createCategoryDto,
       userId,
     );
@@ -23,18 +23,18 @@ export class CategoriesService {
   }
 
   public async get(userId: number) {
-    const categories = await this.categoriesModel.getAll(userId);
+    const categories = await this.categoryModel.getAll(userId);
     return categories;
   }
 
   public async delete(id: number, userId: number) {
-    const isCategoryExists = await this.categoriesModel.findCategoryById(
+    const isCategoryExists = await this.categoryModel.findCategoryById(
       id,
       userId,
     );
     if (!isCategoryExists) throw CustomError.notFound("Category not found");
 
-    const categoryDeleted = await this.categoriesModel.delete(id, userId);
+    const categoryDeleted = await this.categoryModel.delete(id, userId);
     return categoryDeleted;
   }
 
@@ -43,13 +43,13 @@ export class CategoriesService {
     userId: number,
     updateCategoryDto: UpdateCategoryDto,
   ) {
-    const isCategoryExists = await this.categoriesModel.findCategoryById(
+    const isCategoryExists = await this.categoryModel.findCategoryById(
       id,
       userId,
     );
     if (!isCategoryExists) throw CustomError.notFound("Category not found");
 
-    const categoryUpdated = await this.categoriesModel.update(
+    const categoryUpdated = await this.categoryModel.update(
       id,
       updateCategoryDto,
     );

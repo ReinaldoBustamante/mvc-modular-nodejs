@@ -2,7 +2,7 @@ import { prisma } from "../../config/db";
 import { CustomError } from "../../errors/CustomError";
 import { UpdateCategoryDto } from "./dtos/updateCategory.dto";
 
-export class CategoriesModel {
+export class CategoryModel {
   
   public async findCategory(name: string, userId: number) {
     try {
