@@ -96,7 +96,7 @@ describe("authService - loginUser", () => {
       password: "123",
     });
     expect(user).toEqual({
-      status: "loged",
+      status: "logged",
       token: "token",
     });
   });
