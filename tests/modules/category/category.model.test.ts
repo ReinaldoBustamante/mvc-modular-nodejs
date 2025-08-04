@@ -34,13 +34,49 @@ describe('categoryModule - model', () => {
             await expect(category).rejects.toThrow('Error buscando categoria')
         })
     })
+
     describe('categoryModel - findCategoryById', () => {
         beforeEach(() => {
             categoryModel = new CategoryModel()
             jest.clearAllMocks();
         })
-        it('', () => {
-            expect(true).toBe(true);
+        it('', async () => {
+            const mockCategory = {id: 1, name: 'ahorro', budget: 2400, user_id: 1};
+            (prisma.categories.findUnique as jest.Mock).mockResolvedValue(mockCategory);
+            const categoryFound = await categoryModel.findCategoryById(1, 1);
+            expect(categoryFound).toEqual(mockCategory);
         })
     })
+
+    describe('categoryModel - create', () => {
+        beforeEach(() => {
+            categoryModel = new CategoryModel()
+            jest.clearAllMocks();
+        })
+        it('', async () => {
+            const mockPayload = {name: 'casa', budget: 400000};
+            (prisma.categories.create as jest.Mock).mockResolvedValue({id: 1, ...mockPayload})
+            const category = await categoryModel.create(mockPayload, 1)
+            expect(category).toEqual({id: 1, ...mockPayload})
+        })
+        it('', async () => {
+            const mockPayload = {name: '', budget: 0};
+            (prisma.categories.create as jest.Mock).mockRejectedValue(new Error(''))
+            const category = categoryModel.create(mockPayload, 1)
+            await expect(category).rejects.toThrow('Error creando categoria')
+        })
+    })
+
+    describe('categoryModel - getAll', () => {
+
+    })
+
+    describe('categoryModel - delete', () => {
+
+    })
+
+    describe('categoryModel - update', () => {
+
+    })
+    
 })
