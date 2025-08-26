@@ -1,6 +1,6 @@
-import { prisma } from "../../config/db";
-import { CustomError } from "../../errors/CustomError";
-import { UpdateCategoryDto } from "./dtos/updateCategory.dto";
+import { prisma } from "../config/db";
+import { CustomError } from "../errors/CustomError";
+import { UpdateCategoryDto } from "../modules/category/dtos";
 
 export class CategoryModel {
   

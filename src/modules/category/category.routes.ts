@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { CategoryController } from "./category.controller";
 import { CategoryService } from "./category.service";
-import { CategoryModel } from "./category.model";
 import { ValidateMiddleware } from "../../middlewares";
 import { categorySchema } from "./schemas/categorySchema";
+import { CategoryModel } from "../../models";
 
 export class CategoriesRouter {
   public static router() {

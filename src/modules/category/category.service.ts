@@ -1,5 +1,6 @@
 import { CustomError } from "../../errors/CustomError";
-import { CategoryModel } from "./category.model";
+import { CategoryModel } from "../../models";
+
 import { CreateCategoryDto } from "./dtos/createCategory.dto";
 import { UpdateCategoryDto } from "./dtos/updateCategory.dto";
 
