@@ -1,8 +1,8 @@
-import { prisma } from "../../../src/config/db";
-import { CustomError } from "../../../src/errors/CustomError";
-import { AuthModel } from "../../../src/modules/auth/auth.model";
+import { prisma } from "../../src/config/db";
+import { CustomError } from "../../src/errors/CustomError";
+import { AuthModel } from "../../src/models";
 
-jest.mock("../../../src/config/db", () => ({
+jest.mock("../../src/config/db", () => ({
   prisma: {
     users: {
       findUnique: jest.fn(),

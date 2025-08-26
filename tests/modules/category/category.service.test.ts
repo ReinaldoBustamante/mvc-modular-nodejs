@@ -43,3 +43,48 @@ describe('get', () => {
         expect(categories).toEqual([]);
     })
 })
+
+describe('delete', () => {
+    beforeEach(() => {
+        jest.clearAllMocks()
+    })
+    it('error', async () => {
+        (mockCategoryModel.findCategoryById as jest.Mock).mockResolvedValue(null)
+        const categoryDeleted = categoryService.delete(1, 1)
+        await expect(categoryDeleted).rejects.toThrow('Category not found')
+        await expect(categoryDeleted).rejects.toBeInstanceOf(CustomError)
+    })
+    it('return category deleted', async () => {
+        const mockCategoryDeleted = {id: 1, name: 'category1', budget:4000};
+        (mockCategoryModel.findCategoryById as jest.Mock).mockResolvedValue(mockCategoryDeleted);
+        (mockCategoryModel.delete as jest.Mock).mockResolvedValue(mockCategoryDeleted)
+        const categoryDeleted = await categoryService.delete(1,1)
+        expect(categoryDeleted).toEqual(mockCategoryDeleted)
+    })
+})
+
+describe('update', () => {
+    beforeEach(() => {
+        jest.clearAllMocks()
+    })
+    it('error when category don\'t exist', async () => {
+        const mockCategoryUpdated = {name: 'a', budget: 3000};
+        (mockCategoryModel.findCategoryById as jest.Mock).mockResolvedValue(null);
+        const categoryUpdated = categoryService.update(1, 1, mockCategoryUpdated);
+        await expect(categoryUpdated).rejects.toThrow('Category not found')
+        await expect(categoryUpdated).rejects.toBeInstanceOf(CustomError)
+    })
+    it('updateCategoryData withouyt user_id', async () => {
+        const mockCategoryUpdated = {id: 1, name: 'a', budget: 3000, user_id: 1};
+        const mockCategory = {id: 1, name: 'b', buidget: 2000, user_id: 1};
+        (mockCategoryModel.findCategoryById as jest.Mock).mockResolvedValue(mockCategory);
+        (mockCategoryModel.update as jest.Mock).mockResolvedValue(mockCategoryUpdated);
+
+        const categoryUpdated = await categoryService.update(1, 1, mockCategoryUpdated);
+        expect(categoryUpdated).toEqual({
+            id: 1,
+            name: 'a',
+            budget:3000
+        })
+    })
+})

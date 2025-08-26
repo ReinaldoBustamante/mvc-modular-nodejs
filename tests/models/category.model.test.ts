@@ -1,8 +1,8 @@
-import { prisma } from '../../../src/config/db'
-import { CustomError } from '../../../src/errors/CustomError'
-import { CategoryModel } from '../../../src/modules/category/category.model'
+import { prisma } from '../../src/config/db'
+import { CustomError } from '../../src/errors/CustomError'
+import { CategoryModel } from '../../src/models'
 
-jest.mock('../../../src/config/db', () => ({
+jest.mock('../../src/config/db', () => ({
     prisma: {
         categories: {
             findUnique: jest.fn(),
